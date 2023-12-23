@@ -3,7 +3,7 @@ import "../styles/Signinpage.css";
 import { userContext } from "../App";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Navbar from "./navbar";
+import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Header from "./Header";
 import Bike from "./bike";
