@@ -1,12 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import "../styles/Signinpage.css";
 import { userContext } from "../App";
-import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Header from "./Header";
-import Bike from "./bike";
+import Bike from "./Bike";
 import Head from "./Head";
 
 const datas = createContext();
