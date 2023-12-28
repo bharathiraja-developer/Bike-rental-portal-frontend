@@ -2,12 +2,18 @@ import React, { useContext, useEffect, useState } from "react";
 import { userContext } from "../App";
 import "../styles/Bookings.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Bookings() {
   const { register, setRegister } = useContext(userContext);
   const [value, setValue] = useState([]);
+  const history = useNavigate();
   useEffect(() => {
     let user = sessionStorage.getItem("loggedInUser");
+    if (!user) {
+      history("/Signin");
+      return;
+    }
     let loggedUser = JSON.parse(user);
     setRegister(loggedUser);
   }, []);

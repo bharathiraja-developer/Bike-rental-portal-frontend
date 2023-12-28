@@ -2,15 +2,17 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import "../styles/Signinpage.css";
 import { userContext } from "../App";
 import axios from "axios";
-import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Header from "./Header";
 import Bike from "./Bike";
 import Head from "./Head";
+import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
 
 const datas = createContext();
 
 function Home() {
+  const history = useNavigate();
   const { register, setRegister } = useContext(userContext);
   const [data, setData] = useState([]);
   const [filterData, setFilterData] = useState([]);
@@ -27,6 +29,10 @@ function Home() {
       setData(res.data);
     });
     let user = sessionStorage.getItem("loggedInUser");
+    if (!user) {
+      history("/Signin");
+      return;
+    }
     let loggedUser = JSON.parse(user);
     setRegister(loggedUser);
   }, []);
