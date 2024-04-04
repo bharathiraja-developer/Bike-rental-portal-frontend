@@ -55,6 +55,7 @@ function SignupPage() {
                         type="email"
                         id="form3Example3"
                         className="form-control"
+                        autoComplete="username"
                         value={register.username}
                         required
                         onChange={(e) => {
@@ -84,12 +85,12 @@ function SignupPage() {
                       />
                     </div>
                     <div className="form-outline mb-4">
-                      <label className="form-label" htmlFor="form3Example1">
+                      <label className="form-label" htmlFor="form3Example2">
                         Mobile
                       </label>
                       <input
                         type="text"
-                        id="form3Example1"
+                        id="form3Example2"
                         className="form-control"
                         value={register.Lastname}
                         required
@@ -102,12 +103,12 @@ function SignupPage() {
                       />
                     </div>
                     <div className="form-outline mb-4">
-                      <label className="form-label" htmlFor="form3Example1">
+                      <label className="form-label" htmlFor="form3Example5">
                         Address
                       </label>
                       <input
                         type="text"
-                        id="form3Example1"
+                        id="form3Example5"
                         className="form-control"
                         value={register.Lastname}
                         required
@@ -128,6 +129,7 @@ function SignupPage() {
                         type="password"
                         id="form3Example4"
                         className="form-control"
+                        autoComplete="current-password"
                         value={register.password}
                         required
                         onChange={(e) => {

@@ -69,12 +69,13 @@ function Reset() {
                     }}
                   >
                     <div className="form-outline mb-4">
-                      <label className="form-label" htmlFor="form3Example4">
+                      <label className="form-label" htmlFor="form3Example2">
                         OTP :
                       </label>
                       <input
                         type="text"
-                        id="form3Example4"
+                        id="form3Example2"
+                        autoComplete="otp"
                         className="form-control"
                         value={otp}
                         required
@@ -84,12 +85,13 @@ function Reset() {
                       />
                     </div>
                     <div className="form-outline mb-4">
-                      <label className="form-label" htmlFor="form3Example4">
+                      <label className="form-label" htmlFor="form3Example3">
                         New Password
                       </label>
                       <input
                         type="password"
-                        id="form3Example4"
+                        id="form3Example3"
+                        autoComplete="new-password"
                         className="form-control"
                         value={newpas}
                         required
@@ -105,6 +107,7 @@ function Reset() {
                       <input
                         type="password"
                         id="form3Example4"
+                        autoComplete="new-password"
                         className="form-control"
                         value={repas}
                         required

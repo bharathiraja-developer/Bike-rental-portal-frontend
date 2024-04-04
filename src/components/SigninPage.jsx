@@ -69,6 +69,7 @@ function SigninPage() {
                         <input
                           type="email"
                           id="form3Example3"
+                          autoComplete="username"
                           className="form-control"
                           value={register.username}
                           required
@@ -89,6 +90,7 @@ function SigninPage() {
                       <input
                         type="password"
                         id="form3Example4"
+                        autoComplete="current-password"
                         className="form-control"
                         value={register.password}
                         required

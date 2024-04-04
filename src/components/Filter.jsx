@@ -47,6 +47,7 @@ function Filter() {
             <input
               type="date"
               min={new Date().toISOString().split("T")[0]}
+              required
               onChange={(e) => {
                 setDetail({ ...detail, pick: e.target.value });
               }}
@@ -65,6 +66,7 @@ function Filter() {
             <input
               type="date"
               min={new Date().toISOString().split("T")[0]}
+              required
               onChange={(e) => {
                 setDetail({ ...detail, drop: e.target.value });
               }}
