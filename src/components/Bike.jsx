@@ -49,6 +49,7 @@ function Bike() {
                   </div>
                   <div id="lower-side">
                     <p id="message">Congratulations, Bike Booked sucessfully</p>
+                    <p>The bike owner will contact you shortly</p>
                     <Link
                       onClick={(e) => {
                         setChoose(0);
