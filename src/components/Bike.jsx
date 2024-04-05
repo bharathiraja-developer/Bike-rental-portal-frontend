@@ -142,6 +142,7 @@ function Bike() {
                                     {
                                       id: bike._id,
                                       username: register.username,
+                                      detail: detail,
                                     }
                                   )
                                   .then(() => {
@@ -238,6 +239,7 @@ function Bike() {
                                   {
                                     id: bike._id,
                                     username: register.username,
+                                    detail: detail,
                                   }
                                 )
                                 .then(() => {

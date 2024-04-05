@@ -15,6 +15,7 @@ function NoBooking() {
 function Bookings() {
   const { register, setRegister } = useContext(userContext);
   const [value, setValue] = useState([]);
+  const [book, setBook] = useState([]);
   const history = useNavigate();
   useEffect(() => {
     let user = sessionStorage.getItem("loggedInUser");
@@ -32,12 +33,20 @@ function Bookings() {
     .then((res) => {
       setValue(res.data.bookings);
     });
+  axios
+    .get("https://bike-rental-7ul5.onrender.com/api/bookings", {
+      username: register.username,
+    })
+    .then((res) => {
+      setBook(res);
+      console.log(res);
+    });
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid px-5">
           <a className="navbar-brand" href="#!">
-            Welcome {register.name} !
+            {register.name}'s Bookings
           </a>
           <form className="d-flex">
             <Link to="/Home" className="btn btn-outline-dark me-2">
@@ -48,7 +57,7 @@ function Bookings() {
               to="/Signin"
               onClick={() => {
                 sessionStorage.clear();
-                setregister({
+                setRegister({
                   token: "",
                   username: "",
                   name: "",
