@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { userContext } from "../App";
+import axios from "axios";
 
 function Navbar() {
   const { register, setregister } = useContext(userContext);

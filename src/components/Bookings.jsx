@@ -3,6 +3,7 @@ import { userContext } from "../App";
 import "../styles/Bookings.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { datas } from "./Home";
 
 function NoBooking() {
   return (
@@ -15,7 +16,7 @@ function NoBooking() {
 function Bookings() {
   const { register, setRegister } = useContext(userContext);
   const [value, setValue] = useState([]);
-  const [book, setBook] = useState([]);
+  // const [book, setbook] = useState("");
   const history = useNavigate();
   useEffect(() => {
     let user = sessionStorage.getItem("loggedInUser");
@@ -25,22 +26,22 @@ function Bookings() {
     }
     let loggedUser = JSON.parse(user);
     setRegister(loggedUser);
+    load();
   }, []);
-  axios
-    .get("https://bike-rental-7ul5.onrender.com/api/users/profile", {
-      headers: { Authorization: register.token },
-    })
-    .then((res) => {
-      setValue(res.data.bookings);
-    });
-  axios
-    .get("https://bike-rental-7ul5.onrender.com/api/bookings", {
-      username: register.username,
-    })
-    .then((res) => {
-      setBook(res);
-      console.log(res);
-    });
+  // axios
+  //   .get("https://bike-rental-7ul5.onrender.com/api/users/profile", {
+  //     headers: { Authorization: register.token },
+  //   })
+  //   .then((res) => {
+  //     setValue(res.data.bookings);
+  //   });
+  let load = async () => {
+    let res = await axios.get(
+      `https://bike-rental-7ul5.onrender.com/api/bookings/${register.username}`
+    );
+    setValue(res.data.details);
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -82,18 +83,32 @@ function Bookings() {
                 <div className="col-3 d-flex justify-content-start">
                   <img
                     style={{ width: "100%", height: "100%", objectFit: "fill" }}
-                    src={item.image}
+                    src={item.bikedetail.image}
                   ></img>
                 </div>
-                <div className="col-4 d-flex justify-content-start">
+                <div className="col-3 d-flex justify-content-start">
                   <div>
-                    <h4 className="ms-2 mt-4">{item.modelName}</h4>
-                    <p className="ms-2 mt-2">{item.details.brand}</p>
+                    <h4 className="ms-2 mt-4">{item.bikedetail.modelName}</h4>
+                    <p className="ms-2 mt-2">{item.bikedetail.details.brand}</p>
+                    <p className="ms-2 mt-2">
+                      <i
+                        className="fa-solid fa-location-dot me-2"
+                        style={{ color: "black" }}
+                      ></i>
+                      {item.bikedetail.location}
+                    </p>
                   </div>
                 </div>
-                <div className="col-5">
+                <div className="col-3 d-flex justify-content-start">
+                  <div>
+                    <p className="ms-2 mt-4">Booked At : {item.bookedAt}</p>
+                    <p className="ms-2 mt-2">Pick Up date : {item.pick}</p>
+                    <p className="ms-2 mt-2">Drop date : {item.drop}</p>
+                  </div>
+                </div>
+                <div className="col-3">
                   <p className="d-flex justify-content-end pe-4 mt-4">
-                    Price : Rs.{item.price[1]}/day
+                    Price : Rs.{item.bikedetail.price[1]}/day
                   </p>
                   <div className="d-flex justify-content-end pe-4 mt-4"></div>
                 </div>
