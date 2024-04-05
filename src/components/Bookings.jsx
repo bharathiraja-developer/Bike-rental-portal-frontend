@@ -16,7 +16,6 @@ function NoBooking() {
 function Bookings() {
   const { register, setRegister } = useContext(userContext);
   const [value, setValue] = useState([]);
-  // const [book, setbook] = useState("");
   const history = useNavigate();
   useEffect(() => {
     let user = sessionStorage.getItem("loggedInUser");
@@ -28,13 +27,6 @@ function Bookings() {
     setRegister(loggedUser);
     load();
   }, []);
-  // axios
-  //   .get("https://bike-rental-7ul5.onrender.com/api/users/profile", {
-  //     headers: { Authorization: register.token },
-  //   })
-  //   .then((res) => {
-  //     setValue(res.data.bookings);
-  //   });
   let load = async () => {
     let res = await axios.get(
       `https://bike-rental-7ul5.onrender.com/api/bookings/${register.username}`
