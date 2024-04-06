@@ -8,6 +8,24 @@ function Bike() {
   const { register, setRegister } = useContext(userContext);
   const { data, filterData, detail, setDetail, choose, setChoose } =
     useContext(datas);
+
+  let load = async (id) => {
+    if (detail.pick !== "") {
+      setDetail({ ...detail, id: id });
+      await axios
+        .put("https://bike-rental-7ul5.onrender.com/api/users/bike", {
+          id: id,
+          username: register.username,
+          detail: detail,
+        })
+        .then(() => {
+          setChoose(1);
+        });
+    } else {
+      window.alert("Set a pick up and drop off date");
+    }
+  };
+
   if (choose == 1) {
     return (
       <div>
@@ -133,22 +151,7 @@ function Bike() {
                           <div className="text-center">
                             <a
                               to="/Booking"
-                              onClick={async (e) => {
-                                setDetail({ ...detail, id: bike._id });
-                                console.log(bike._id, register.username);
-                                await axios
-                                  .put(
-                                    "https://bike-rental-7ul5.onrender.com/api/users/bike",
-                                    {
-                                      id: bike._id,
-                                      username: register.username,
-                                      detail: detail,
-                                    }
-                                  )
-                                  .then(() => {
-                                    setChoose(1);
-                                  });
-                              }}
+                              onClick={() => load(bike._id)}
                               className="btn btn-outline-dark mt-3"
                             >
                               Book Now
@@ -230,22 +233,7 @@ function Bike() {
                         <div className="text-center">
                           <a
                             to="/Booking"
-                            onClick={async (e) => {
-                              setDetail({ ...detail, id: bike._id });
-
-                              await axios
-                                .put(
-                                  "https://bike-rental-7ul5.onrender.com/api/users/bike",
-                                  {
-                                    id: bike._id,
-                                    username: register.username,
-                                    detail: detail,
-                                  }
-                                )
-                                .then(() => {
-                                  setChoose(1);
-                                });
-                            }}
+                            onClick={() => load(bike._id)}
                             className="btn btn-outline-dark mt-3"
                           >
                             Book Now
