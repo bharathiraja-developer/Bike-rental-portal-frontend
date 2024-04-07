@@ -42,16 +42,19 @@ function SignupPage() {
                     <form
                       onSubmit={async (e) => {
                         e.preventDefault();
-                        const signup = await axios.post(
-                          `https://bike-rental-7ul5.onrender.com/api/users/signup`,
-                          {
-                            username: register.username,
-                            password: register.password,
-                            name: register.name,
-                            mobile: register.mobile,
-                            address: register.address,
-                          }
-                        );
+                        setLoading(true);
+                        const signup = await axios
+                          .post(
+                            `https://bike-rental-7ul5.onrender.com/api/users/signup`,
+                            {
+                              username: register.username,
+                              password: register.password,
+                              name: register.name,
+                              mobile: register.mobile,
+                              address: register.address,
+                            }
+                          )
+                          .then(() => setLoading(false));
                         setRegister({
                           username: "",
                           name: "",
