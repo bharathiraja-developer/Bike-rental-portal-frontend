@@ -31,11 +31,17 @@ function SignupPage() {
               <div className="card bg-glass">
                 <div className="card-body px-4 py-5 px-md-5">
                   <form
-                    onSubmit={(e) => {
+                    onSubmit={async (e) => {
                       e.preventDefault();
-                      axios.post(
-                        "https://bike-rental-7ul5.onrender.com/api/users",
-                        register
+                      const signup = await axios.post(
+                        `https://bike-rental-7ul5.onrender.com/api/users/signup`,
+                        {
+                          username: register.username,
+                          password: register.password,
+                          name: register.name,
+                          mobile: register.mobile,
+                          address: register.address,
+                        }
                       );
                       setRegister({
                         username: "",
