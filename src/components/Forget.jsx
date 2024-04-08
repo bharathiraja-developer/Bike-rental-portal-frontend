@@ -33,7 +33,6 @@ function Forget() {
                   <form
                     onSubmit={(e) => {
                       e.preventDefault();
-                      console.log(register);
                       axios.patch(
                         `https://bike-rental-7ul5.onrender.com/api/users/forget`,
                         {
