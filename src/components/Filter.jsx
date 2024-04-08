@@ -2,8 +2,15 @@ import React, { useContext } from "react";
 import { datas } from "./Home";
 
 function Filter() {
-  const { data, filterData, setFilterData, detail, setDetail } =
-    useContext(datas);
+  const {
+    data,
+    filterData,
+    setFilterData,
+    detail,
+    setDetail,
+    loading,
+    setLoading,
+  } = useContext(datas);
   return (
     <div className="border border-primary mt-3 p-2">
       <div className="d-md-flex flex-row justify-content-center">
@@ -80,6 +87,10 @@ function Filter() {
             className="btn btn-primary"
             onClick={(e) => {
               e.preventDefault();
+              setLoading(true);
+              setTimeout(() => {
+                setLoading(false);
+              }, 700);
               let filter = data.filter((value) => {
                 return value.location === detail.location;
               });

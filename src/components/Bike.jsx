@@ -1,30 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { datas } from "./Home";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { userContext } from "../App";
+import Button from "./Button";
+import "../styles/loading.css";
 
 function Bike() {
   const { register, setRegister } = useContext(userContext);
-  const { data, filterData, detail, setDetail, choose, setChoose } =
-    useContext(datas);
-
-  let load = async (id) => {
-    if (detail.pick !== "") {
-      setDetail({ ...detail, id: id });
-      await axios
-        .put("https://bike-rental-7ul5.onrender.com/api/users/bike", {
-          id: id,
-          username: register.username,
-          detail: detail,
-        })
-        .then(() => {
-          setChoose(1);
-        });
-    } else {
-      window.alert("Set a pick up and drop off date");
-    }
-  };
+  const {
+    data,
+    filterData,
+    setFilterData,
+    detail,
+    setDetail,
+    choose,
+    setChoose,
+    loading,
+    setLoading,
+  } = useContext(datas);
 
   if (choose == 1) {
     return (
@@ -71,6 +64,7 @@ function Bike() {
                     <Link
                       onClick={(e) => {
                         setChoose(0);
+                        setFilterData([]);
                       }}
                       to="/Home"
                       id="contBtn"
@@ -149,13 +143,13 @@ function Bike() {
                         </table>
                         <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
                           <div className="text-center">
-                            <a
-                              to="/Booking"
-                              onClick={() => load(bike._id)}
-                              className="btn btn-outline-dark mt-3"
-                            >
-                              Book Now
-                            </a>
+                            <Button
+                              id={bike._id}
+                              setChoose={setChoose}
+                              register={register}
+                              detail={detail}
+                              setDetail={setDetail}
+                            />
                           </div>
                         </div>
                       </div>
@@ -167,6 +161,13 @@ function Bike() {
           </div>
         </div>
       </section>
+    );
+  } else if (loading) {
+    return (
+      <div className="loader-container">
+        <div className="spinner"></div>
+        <p className="paragraph">Please wait...</p>
+      </div>
     );
   }
   return (
@@ -231,13 +232,13 @@ function Bike() {
                       </table>
                       <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
                         <div className="text-center">
-                          <a
-                            to="/Booking"
-                            onClick={() => load(bike._id)}
-                            className="btn btn-outline-dark mt-3"
-                          >
-                            Book Now
-                          </a>
+                          <Button
+                            id={bike._id}
+                            setChoose={setChoose}
+                            register={register}
+                            detail={detail}
+                            setDetail={setDetail}
+                          />
                         </div>
                       </div>
                     </div>

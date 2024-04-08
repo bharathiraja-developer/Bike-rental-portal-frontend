@@ -14,6 +14,7 @@ const datas = createContext();
 function Home() {
   const history = useNavigate();
   const { register, setRegister } = useContext(userContext);
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [choose, setChoose] = useState(0);
@@ -27,6 +28,7 @@ function Home() {
   useEffect(() => {
     axios.get("https://bike-rental-7ul5.onrender.com/api/bikes").then((res) => {
       setData(res.data);
+      setLoading(false);
     });
     let user = sessionStorage.getItem("loggedInUser");
     if (!user) {
@@ -47,6 +49,8 @@ function Home() {
           setDetail,
           choose,
           setChoose,
+          loading,
+          setLoading,
         }}
       >
         <Navbar />
