@@ -68,6 +68,7 @@ function SigninPage() {
                             history("/Home");
                           })
                           .catch((error) => {
+                            setLoading(false);
                             alert("Please enter correct username and password");
                           });
                       }}

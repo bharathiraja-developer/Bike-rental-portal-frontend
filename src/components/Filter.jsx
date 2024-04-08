@@ -18,6 +18,7 @@ function Filter() {
             ></i>
             <select
               className="rounded"
+              autoFocus
               onChange={(e) => {
                 setDetail({ ...detail, location: e.target.value });
               }}
